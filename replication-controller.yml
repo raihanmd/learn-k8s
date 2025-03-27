@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-rc
+  # labels: #! this just label the replication controller itself
+  #   app: webapp
+  # annotations:
+  #   description: "This is a replication controller for myapp"
+  #   owner: "John Doe"
+spec:
+  replicas: 3
+  selector:
+    #* this is the label selector for the pods managed by this replication controller
+    app: webapp
+
+  template:
+    # actually the pod template from the nginx.yml
+    metadata:
+      name: nginx #! will auto add unique id
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+          livenessProbe: # more choises: readinessProbe, startupProbe
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 0 # default is 0
+            periodSeconds: 10 # default is 10
+            timeoutSeconds: 1 # default is 1
+            successThreshold: 1 # default is 1
+            failureThreshold: 3 # default is 3
+
+#! deleting
+# kubectl delete -f <file> [--cascade=orphan] #! orphan will delete the pods but not the replication controller
+# kubectl delete rc <name-rc>
