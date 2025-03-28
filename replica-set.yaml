@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-nginx
+  # labels: #! this just label the replica set itself
+  #   app: app-nginx
+  # annotations:
+  #   description: "This is a replica set for app-nginx"
+  #   owner: "John Doe"
+spec:
+  # nodeSelector: #! this is the label selector for the nodes where the pods will be scheduled
+  nodeSelector:
+    gpu: "true"
+
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In # more choises: NotIn, Exists, DoesNotExist
+        values:
+          - app-nginx
+      - key: env
+        operator: In # more choises: NotIn, Exists, DoesNotExist
+        values:
+          - staging
+          - dev
+
+    # matchLabels: # will be the same as ReplicationController
+    #   app: app-nginx
+
+  template:
+    # actually the pod template from the nginx.yml
+    metadata:
+      name: nginx #! will auto add unique id
+      labels:
+        app: app-nginx
+        env: staging
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+          livenessProbe: # more choises: readinessProbe, startupProbe
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 0 # default is 0
+            periodSeconds: 10 # default is 10
+            timeoutSeconds: 1 # default is 1
+            successThreshold: 1 # default is 1
+            failureThreshold: 3 # default is 3
+
+#! deleting
+# kubectl delete -f <file> [--cascade=orphan] #! orphan will delete the pods but not the replica set
+# kubectl delete rs <name-rs> [--cascade=orphan]
+# kubectl delete rs <name-rs> [--cascade=orphan] [-l !<label>]

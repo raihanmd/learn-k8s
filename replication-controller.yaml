@@ -5,7 +5,7 @@ metadata:
   # labels: #! this just label the replication controller itself
   #   app: webapp
   # annotations:
-  #   description: "This is a replication controller for myapp"
+  #   description: "This is a replication controller for webapp"
   #   owner: "John Doe"
 spec:
   replicas: 3
