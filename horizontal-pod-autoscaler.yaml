@@ -78,4 +78,4 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: nodejs-web
-  targetCPUUtilizationPercentage: 70
+  targetCPUUtilizationPercentage: 60
