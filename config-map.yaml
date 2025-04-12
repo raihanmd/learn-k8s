@@ -5,6 +5,9 @@ metadata:
 data:
   APPLICATION: My Cool Application
   VERSION: 1.0.0
+  config: |
+    tcp-keepalive 240
+    maxmemory 1mb
 
 ---
 apiVersion: apps/v1
