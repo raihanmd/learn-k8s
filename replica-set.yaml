@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: rs-nginx
-  # labels: #! this just label the replica set itself
-  #   app: app-nginx
   # annotations:
   #   description: "This is a replica set for app-nginx"
   #   owner: "John Doe"
