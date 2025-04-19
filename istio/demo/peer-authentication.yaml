@@ -1,0 +1,8 @@
+apiVersion: "security.istio.io/v1beta1"
+kind: "PeerAuthentication"
+metadata:
+  name: "default"
+  namespace: "istio-system" #! klo diisi istio-system artinya kita implementasikan disemua service mesh (yg ada istio-injection=enabled)
+spec:
+  mtls:
+    mode: STRICT
