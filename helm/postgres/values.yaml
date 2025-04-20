@@ -1,0 +1,29 @@
+auth:
+  database: main
+  postgresPassword: root
+  enablePostgreUser: true
+  username: adit
+  password: adit
+
+persistence:
+  size: 1Gi
+#* Get release
+# helm ls -n <OPTIONAL ns>
+
+#* install release, use --create-namespace when installing if ns belum ada
+# helm install <release/name> <chart> --create-namespace <ns> -f <file> --version <OPTIONAL OR LATEST: version>
+
+#* helm can also upgrade (or update file yaml in kubectl) the existing value
+# helm upgrade <release> <chart> -f <file>
+
+#* helm also provide a history for like upgrading release
+# helm history <release>
+
+#* tekadang butuh cek values yg dr versi sebelumnya, liat dlu ke history, disana ada revision, trus bisa di get valuesnya
+# helm get values <release> --revision <revision>
+
+#* helm can also rollback to latest revision i think
+# helm rollback <release> <revision>
+
+#* menghapus release, tapi secara default pv dan pvc ga terhapus
+# helm uninstall <release>
