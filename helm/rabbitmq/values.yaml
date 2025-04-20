@@ -1,0 +1,7 @@
+auth:
+  username: root
+  password: root
+
+persistence:
+  resources: 1Gi
+# k port-forward pod/rabbitmq-0 15672 > /dev/null
