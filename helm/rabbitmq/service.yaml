@@ -7,11 +7,11 @@ spec:
     app.kubernetes.io/instance: rabbitmq
   type: NodePort
   ports:
-    - name: http get
+    - name: http port
       port: 15672
       targetPort: 15672
       nodePort: 31567
-    - name: amqp
+    - name: amqp port
       port: 5672
       targetPort: 5672
       nodePort: 31568
