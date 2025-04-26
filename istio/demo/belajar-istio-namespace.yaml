@@ -3,4 +3,5 @@ kind: Namespace
 labels:
   istio-injection: enabled
 metadata:
+  #! name namespace
   name: belajar-istio
