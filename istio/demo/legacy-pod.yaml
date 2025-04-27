@@ -1,14 +1,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: ns-tanpa-istio
+  name: without-istio
 ---
-
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: legacy-pod
-  namespace: ns-tanpa-istio
+  namespace: without-istio
 spec:
   selector:
     matchLabels:
@@ -20,6 +19,6 @@ spec:
         app: legacy-pod
     spec:
       containers:
-      - name: legacy-pod
-        image: nicolaka/netshoot
-        command: ["tail",  "-f", "/dev/null"]
+        - name: legacy-pod
+          image: nicolaka/netshoot
+          command: ["tail", "-f", "/dev/null"]
