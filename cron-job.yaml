@@ -5,7 +5,7 @@ metadata:
   # labels:
   #   name: cronjob-nodejs
 spec:
-  schedule: "* * * * *"
+  schedule: "* * * * 5"
   jobTemplate:
     spec:
       template:
